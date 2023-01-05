@@ -36,7 +36,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
       .catch((error) => {
         console.log(error);
       });
-  }, [onCardClick]);
+  }, []);
 
   return (
     <main>

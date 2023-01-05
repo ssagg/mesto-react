@@ -10,15 +10,19 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({ isOpen: false });
+  const [buttonText, setButtonText] = useState("");
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
+    setButtonText("Сохранить");
   }
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
+    setButtonText("Сохранить");
   }
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
+    setButtonText("Создать");
   }
   function handleCardClick(card) {
     setSelectedCard({
@@ -52,6 +56,7 @@ function App() {
         name="profile"
         title="Редактировать профиль"
         onClose={closeAllPopups}
+        buttonText={buttonText}
         children={
           <>
             <input
@@ -90,6 +95,7 @@ function App() {
         name="place"
         title="Новое место"
         onClose={closeAllPopups}
+        buttonText={buttonText}
         children={
           <>
             <input
@@ -126,6 +132,7 @@ function App() {
         name="avatar"
         title="Обновить аватар"
         onClose={closeAllPopups}
+        buttonText={buttonText}
         children={
           <>
             <input

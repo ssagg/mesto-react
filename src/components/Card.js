@@ -7,7 +7,7 @@ function Card({ card, onCardClick }) {
       <img
         className="card__image"
         src={card.link}
-        alt="байкал"
+        alt={card.name}
         onClick={handleClick}
       />
       <button

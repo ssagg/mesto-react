@@ -21,13 +21,12 @@ function PopupWithForm(props) {
           noValidate
         >
           {props.children}
-
           <button
             className="popup__button"
             type="submit"
             id={`button-${props.name}`}
           >
-            Сохранить
+            {props.buttonText}
           </button>
         </form>
       </div>
