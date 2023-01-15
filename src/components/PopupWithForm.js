@@ -19,6 +19,7 @@ function PopupWithForm(props) {
           name={`${props.name}-edit`}
           id={`${props.name}-edit`}
           noValidate
+          onSubmit={props.onSubmit}
         >
           {props.children}
           <button
