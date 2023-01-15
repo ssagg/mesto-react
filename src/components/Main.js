@@ -1,8 +1,6 @@
-import { api } from "../utils/Api.js";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import Card from "./Card.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import { CurrentCardContext } from "../contexts/CurrentCardContext";
 
 function Main({
   onEditProfile,
@@ -11,36 +9,10 @@ function Main({
   onCardClick,
   onCardLike,
   onCardDelete,
-  // cards,
+  cards,
 }) {
-  // const [cards, setCards] = useState([]);
   const currentUser = useContext(CurrentUserContext);
-  const cards = useContext(CurrentCardContext);
 
-  // useEffect(() => {
-  //   api
-  //     .getInitialCards()
-  //     .then((cards) => {
-  //       setCards(
-  //         cards.map((card) => {
-  //           console.log(card);
-  //           return (
-  //             <Card
-  //               card={card}
-  //               key={card._id}
-  //               onCardClick={onCardClick}
-  //               onCardLike={onCardLike}
-  //               onCardDelete={onCardDelete}
-  //             />
-  //           );
-  //         })
-  //       );
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
-  console.log(cards);
   return (
     <main>
       <section className="profile">
@@ -70,7 +42,19 @@ function Main({
         ></button>
       </section>
 
-      <section className="elements">{cards}</section>
+      <section className="elements">
+        {cards.map((card) => {
+          return (
+            <Card
+              card={card}
+              key={card._id}
+              onCardClick={onCardClick}
+              onCardLike={onCardLike}
+              onCardDelete={onCardDelete}
+            />
+          );
+        })}
+      </section>
     </main>
   );
 }

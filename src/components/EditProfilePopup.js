@@ -3,7 +3,7 @@ import PopupWithForm from "./PopupWithForm";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 function EditProfilePopup(props) {
   const [name, setName] = useState("");
-  const [description, setDescription] = useState();
+  const [description, setDescription] = useState("");
   const currentUser = useContext(CurrentUserContext);
 
   useEffect(() => {
@@ -12,7 +12,6 @@ function EditProfilePopup(props) {
   }, [currentUser]);
 
   function handleName(e) {
-    console.log(e.target.value);
     setName(e.target.value);
   }
 
@@ -21,10 +20,7 @@ function EditProfilePopup(props) {
   }
 
   function handleSubmit(e) {
-    // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
-
-    // Передаём значения управляемых компонентов во внешний обработчик
     props.onUpdateUser({
       name,
       about: description,
@@ -48,7 +44,7 @@ function EditProfilePopup(props) {
             name="name"
             minLength="2"
             maxLength="40"
-            value={name}
+            value={name || ""}
             onChange={handleName}
             required
           />
@@ -64,7 +60,7 @@ function EditProfilePopup(props) {
             name="about"
             minLength="2"
             maxLength="200"
-            value={description}
+            value={description || ""}
             onChange={handleDescription}
             required
           />

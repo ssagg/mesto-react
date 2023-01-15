@@ -3,9 +3,7 @@ import { useContext } from "react";
 function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   const currentUser = useContext(CurrentUserContext);
   const isOwn = card.owner._id === currentUser._id;
-  console.log(isOwn);
   const isLiked = card.likes.some((i) => i._id === currentUser._id);
-  console.log(isLiked);
   const cardLikeButtonClassName = `card__icon ${
     isLiked && "card__icon_active"
   }`;
@@ -37,11 +35,6 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
           onClick={handleDeleteClick}
         />
       )}
-      {/* <button
-        aria-label="Удалить"
-        className="card__delete"
-        type="button"
-      ></button> */}
       <div className="card__text">
         <h3 className="card__title">{card.name}</h3>
         <div className="card__icon-box">
