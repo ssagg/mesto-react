@@ -1,33 +1,43 @@
 import React from "react";
 
-function PopupWithForm(props) {
+function PopupWithForm({
+  name,
+  isOpen,
+  onClose,
+  title,
+  onSubmit,
+  children,
+  buttonText,
+  isValid,
+}) {
   return (
     <div
-      className={`popup popup-${props.name} ${props.isOpen && "popup_opened"}`}
+      className={`popup popup-${name} ${isOpen && "popup_opened"}`}
       id="popup-edit"
     >
       <div className="popup__container">
         <button
           aria-label="Закрыть"
-          className={`popup__button-close popup-${props.name}__button-close`}
+          className={`popup__button-close popup-${name}__button-close`}
           type="button"
-          onClick={props.onClose}
-        ></button>
-        <h2 className="popup__title">{props.title}</h2>
+          onClick={onClose}
+        />
+        <h2 className="popup__title">{title}</h2>
         <form
-          className={`popup__form popup-${props.name}__form`}
-          name={`${props.name}-edit`}
-          id={`${props.name}-edit`}
+          className={`popup__form popup-${name}__form`}
+          name={`${name}-edit`}
+          id={`${name}-edit`}
           noValidate
-          onSubmit={props.onSubmit}
+          onSubmit={onSubmit}
         >
-          {props.children}
+          {children}
           <button
-            className="popup__button"
+            disabled={!isValid}
+            className={`popup__button ${!isValid && "popup__button_disabled"}`}
             type="submit"
-            id={`button-${props.name}`}
+            id={`button-${name}`}
           >
-            {props.buttonText}
+            {buttonText}
           </button>
         </form>
       </div>

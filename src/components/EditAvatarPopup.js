@@ -1,43 +1,62 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
+import { useForm } from "react-hook-form";
 import PopupWithForm from "./PopupWithForm";
 
-function EditAvatarPopup(props) {
+function EditAvatarPopup({ isOpen, isLoading, onClose, onUpdateAvatar }) {
   const avatarRef = useRef("");
+  const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+    reset,
+  } = useForm({ mode: "onChange" });
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  useEffect(() => {
+    let defaultValues = {};
+    defaultValues.avatar = "";
 
-    props.onUpdateAvatar({
-      avatar: avatarRef.current.value,
+    reset({ ...defaultValues });
+  }, [isOpen]);
+
+  function onSubmit({ avatar }) {
+    onUpdateAvatar({
+      avatar: avatar,
     });
+    reset();
   }
 
   return (
     <PopupWithForm
-      isOpen={props.isOpen}
+      isOpen={isOpen}
       name="avatar"
       title="Обновить аватар"
-      onClose={props.onClose}
-      buttonText={props.buttonText}
-      onSubmit={handleSubmit}
-      children={
-        <>
-          <input
-            type="url"
-            className="popup__input popup-avatar__input popup__input_type_link"
-            placeholder="Ссылка на картинку"
-            id="avatar-link"
-            name="avatar"
-            ref={avatarRef}
-            required
-          />
-          <span
-            className="popup__error popup__error_visible"
-            id="avatar-link-error"
-          ></span>
-        </>
-      }
-    />
+      onClose={onClose}
+      buttonText={isLoading ? "Сохранение..." : "Сохранить"}
+      onSubmit={handleSubmit(onSubmit)}
+      isValid={isValid}
+    >
+      <input
+        type="url"
+        className="popup__input popup-avatar__input popup__input_type_link"
+        placeholder="Ссылка на картинку"
+        id="avatar-link"
+        ref={avatarRef}
+        {...register("avatar", {
+          required: " Заполните поле",
+          pattern: {
+            value:
+              /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/,
+            message: "Введите ссылку на изображение",
+          },
+        })}
+      />
+      <span
+        className="popup__error popup__error_visible"
+        id="avatar-link-error"
+      >
+        {errors?.avatar && <p>{errors?.avatar.message || "Ощибка"}</p>}
+      </span>
+    </PopupWithForm>
   );
 }
 export default EditAvatarPopup;
