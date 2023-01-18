@@ -11,7 +11,7 @@ function AddPlacePopup({ onAddPlace, isOpen, onClose, isLoading }) {
   } = useForm({ mode: "onChange" });
 
   useEffect(() => {
-    let defaultValues = {};
+    const defaultValues = {};
     defaultValues.name = "";
     defaultValues.link = "";
     reset({ ...defaultValues });
@@ -22,7 +22,6 @@ function AddPlacePopup({ onAddPlace, isOpen, onClose, isLoading }) {
       name,
       link,
     });
-    reset();
   }
   return (
     <PopupWithForm

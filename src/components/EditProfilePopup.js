@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import PopupWithForm from "./PopupWithForm";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
+
 function EditProfilePopup({ isOpen, onClose, onUpdateUser, isLoading }) {
   const currentUser = useContext(CurrentUserContext);
 
@@ -15,7 +16,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, isLoading }) {
   });
 
   useEffect(() => {
-    let defaultValues = {};
+    const defaultValues = {};
     defaultValues.name = currentUser.name;
     defaultValues.about = currentUser.about;
     reset({ ...defaultValues });
@@ -26,7 +27,6 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, isLoading }) {
       name,
       about,
     });
-    reset();
   }
   return (
     <PopupWithForm
