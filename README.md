@@ -8,11 +8,11 @@
 
 ### Технологии
 
-HTML, CSS, flex, grid, media запросы, JavaScript, api, JSX, React version
+HTML, CSS, flex, grid, media запросы, JavaScript, api, JSX, React version, React likes, React-hook-form Validation
 
 ### TODO
 
-React лайки, валидация, авторизация
+авторизация
 
 ### GitHub Pages
 
