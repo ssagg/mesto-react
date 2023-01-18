@@ -14,7 +14,6 @@ function EditAvatarPopup({ isOpen, isLoading, onClose, onUpdateAvatar }) {
   useEffect(() => {
     let defaultValues = {};
     defaultValues.avatar = "";
-
     reset({ ...defaultValues });
   }, [isOpen]);
 
