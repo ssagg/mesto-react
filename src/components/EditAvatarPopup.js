@@ -1,9 +1,8 @@
-import { useRef, useEffect } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import PopupWithForm from "./PopupWithForm";
 
 function EditAvatarPopup({ isOpen, isLoading, onClose, onUpdateAvatar }) {
-  const avatarRef = useRef("");
   const {
     register,
     formState: { errors, isValid },
@@ -12,7 +11,7 @@ function EditAvatarPopup({ isOpen, isLoading, onClose, onUpdateAvatar }) {
   } = useForm({ mode: "onChange" });
 
   useEffect(() => {
-    let defaultValues = {};
+    const defaultValues = {};
     defaultValues.avatar = "";
     reset({ ...defaultValues });
   }, [isOpen]);
@@ -21,7 +20,6 @@ function EditAvatarPopup({ isOpen, isLoading, onClose, onUpdateAvatar }) {
     onUpdateAvatar({
       avatar: avatar,
     });
-    reset();
   }
 
   return (
@@ -39,7 +37,6 @@ function EditAvatarPopup({ isOpen, isLoading, onClose, onUpdateAvatar }) {
         className="popup__input popup-avatar__input popup__input_type_link"
         placeholder="Ссылка на картинку"
         id="avatar-link"
-        ref={avatarRef}
         {...register("avatar", {
           required: " Заполните поле",
           pattern: {

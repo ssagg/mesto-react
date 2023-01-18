@@ -24,7 +24,7 @@ function App() {
     isEditAvatarPopupOpen ||
     isEditProfilePopupOpen ||
     isAddPlacePopupOpen ||
-    selectedCard;
+    selectedCard.isOpen;
 
   useEffect(() => {
     function closeByEscape(evt) {
